@@ -3,6 +3,12 @@ Simple graph implementation
 """
 from util import Stack, Queue  # These may come in handy
 
+"""
+ Vertex
+     identifier (int, name, string, ect.)
+     list of edges
+"""
+
 class Graph:
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
     def __init__(self):
@@ -11,24 +17,61 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
-    def add_edge(self, v1, v2):
+        if not vertex in self.vertices:
+            self.vertices[vertex] = set()
+        else:
+            print("ERROR, vertex exists")
+        
+    def add_edge(self, vertex_from, vertex_to):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        if vertex_from in self.vertices and vertex_to in self.vertices:
+            self.vertices[vertex_from].add(vertex_to)
+        else:
+            print("ERROR, these vertices don't exist")
+
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        
+        q = Queue()
+
+        q.enqueue(starting_vertex)
+
+        found = []
+
+        # > 0
+        while q.size() > 0:
+            for vertex in self.vertices[q.queue[0]]:
+                if vertex not in found:
+                    q.enqueue(vertex)
+                    found.append(vertex)
+            print(q.dequeue())
+
+
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        s = Stack()
+
+        s.push(starting_vertex)
+
+        found = [starting_vertex,]
+
+        # > 0
+        while s.size() > 0:
+            for vertex in self.vertices[s.stack[0]]:
+                if vertex not in found:
+                    s.push(vertex)
+                    found.append(vertex)
+            s.pop()
+        
+
     def dft_recursive(self, starting_vertex):
         """
         Print each vertex in depth-first order
