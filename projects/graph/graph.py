@@ -80,8 +80,8 @@ class Graph:
         """
         if starting_vertex not in visited:
             visited.add(starting_vertex)
-        for node in self.vertices[starting_vertex]:
-            self.dfs(node,visited)
+            for node in self.vertices[starting_vertex]:
+                self.dft_recursive(starting_vertex,visited)
 
     def bfs(self, starting_vertex, destination_vertex):
         """
@@ -92,7 +92,7 @@ class Graph:
         q = Queue()
         visited = set()
 
-        q.enqueue(starting_vertex)
+        q.enqueue([starting_vertex])
 
         while q.size():
             path = q.dequeue()
@@ -113,10 +113,22 @@ class Graph:
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        s = Stack()
 
+        visited = set()
 
+        s.push([starting_vertex])
+        while s.size():
+            path = s.pop()
+            vertice = path[-1]
+            if vertice not in visited:
 
+                if vertice == destination_vertex:
+                    return path
+                for next_node in self.vertices[vertice]:
+                    next_path = path.copy()
+                    next_path.append(next_node)
+                    s.push(next_path)
 
 
 if __name__ == '__main__':
