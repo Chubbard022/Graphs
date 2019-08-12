@@ -72,19 +72,17 @@ class Graph:
                 # Then add all of its neighbors to the top of the stack
                 for next_vert in self.vertices[v]:
                     s.push(next_vert)
-    def dft_recursive(self, starting_vertex):
+    def dft_recursive(self, starting_vertex, visited=set()):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         This should be done using recursion.
         """
-        vertices = self.vertices
+        if starting_vertex not in visited:
+            visit.add(starting_vertex)
+        for node in self.vertices[starting_vertex]:
+            self.dfs(node,visited)
 
-        while vertices is not None:
-            
-            self.dft_recursive(starting_vertex)
-        else:
-            print("the graph is not found")
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
