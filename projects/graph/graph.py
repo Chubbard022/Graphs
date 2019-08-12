@@ -79,7 +79,7 @@ class Graph:
         This should be done using recursion.
         """
         if starting_vertex not in visited:
-            visit.add(starting_vertex)
+            visited.add(starting_vertex)
         for node in self.vertices[starting_vertex]:
             self.dfs(node,visited)
 
@@ -89,7 +89,24 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        q = Queue()
+        visited = set()
+
+        q.enqueue(starting_vertex)
+
+        while q.size():
+            path = q.dequeue()
+            vertice = path[-1]
+            if vertice not in visited:
+                if vertice == destination_vertex:
+                    return path
+                for next_node in self.vertices[vertice]:
+                    next_path = path.copy()
+                    next_path.append(next_node)
+                    q.enqueue(next_path)
+
+
+
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
