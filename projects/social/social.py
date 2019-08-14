@@ -80,7 +80,7 @@ class SocialGraph:
         q = Queue()
         q.enqueue([userID])
 
-        while q.size:
+        while q.size():
             path =   q.dequeue()
             friendID = path[-1]
 
@@ -88,8 +88,10 @@ class SocialGraph:
                 visited[friendID] = path
 
             for friend in self.friendships[friendID]:
-                new_path = path + [friend]
-                q.enqueue(new_path)
+                if friend not in visited:
+                    new_path = list(path)
+                    new_path.append(friend)
+                    q.enqueue(new_path)
 
         return visited
 
